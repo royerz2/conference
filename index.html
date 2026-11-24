@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Conference · Research feed</title>
+<link rel="stylesheet" href="/style.css">
+<script src="/app.js" defer></script>
+</head>
+<body>
+<div class="layout">
+  <aside class="rail">
+    <div class="brand"><span class="mark" aria-hidden="true">C</span><span>Conference</span></div>
+    <nav aria-label="Conference">
+      <button data-view="feed" aria-current="page">Research feed</button>
+      <button data-view="profile">Research profile</button>
+      <button data-view="digest">Email digest</button>
+    </nav>
+    <section class="rail-topics" aria-labelledby="topics-label">
+      <h2 id="topics-label">Followed topics</h2>
+      <div id="rail-topics"></div>
+      <button class="quiet" type="button" data-view="profile">Edit topics <span aria-hidden="true">↗</span></button>
+    </section>
+  </aside>
+  <main>
+    <section id="feed" class="view">
+      <header class="page-header">
+        <div><h1>Research feed</h1><p>New papers, preprints, and datasets relevant to the work you follow.</p></div>
+        <button id="refresh" class="primary">Refresh feed</button>
+      </header>
+      <div id="demo-banner" class="banner" hidden>
+        <div><strong>Example feed</strong><p>Follow a topic or import your public ORCID works to start finding relevant research.</p></div>
+        <button class="secondary" data-view="profile">Set up your profile ↗</button>
+      </div>
+      <div id="scan-status" class="status"></div>
+      <div class="feed-toolbar"><div class="filters" aria-label="Filter the feed">
+        <button data-filter="All" aria-pressed="true">All</button>
+        <button data-filter="Paper" aria-pressed="false">Papers</button>
+        <button data-filter="Preprint" aria-pressed="false">Preprints</button>
+        <button data-filter="Dataset" aria-pressed="false">Datasets</button>
+      </div><span id="feed-count"></span></div>
+      <div id="matches"></div>
+    </section>
+    <section id="profile" class="view" hidden>
+      <header class="page-header"><div><h1>Research profile</h1><p>Use your public work to decide what Conference follows.</p></div></header>
+      <div class="panel">
+        <h2>ORCID</h2>
+        <form id="orcid-form">
+          <label for="orcid-id">ORCID iD or profile URL</label>
+          <div class="inline"><input id="orcid-id" placeholder="0000-0000-0000-0000" required maxlength="100"><button class="secondary">Import public works</button></div>
+        </form>
+        <div id="orcid-record"></div>
+      </div>
+      <form id="topic-form" class="panel">
+        <h2>Followed topics</h2>
+        <label for="topics">Topics and phrases</label>
+        <textarea id="topics" rows="3" maxlength="600" placeholder="single-cell transcriptomics, Arabidopsis drought"></textarea>
+        <p class="hint">Separate up to eight topics with commas. Use the phrases you want to see in paper titles and dataset descriptions.</p>
+        <label for="days">Lookback window in days</label>
+        <input id="days" type="number" min="1" max="365" required>
+        <label class="check"><input id="auto-refresh" type="checkbox"> Refresh daily while Conference is running</label>
+        <button class="primary">Save topics</button>
+      </form>
+    </section>
+    <section id="digest" class="view" hidden>
+      <header class="page-header"><div><h1>Email digest</h1><p>Receive new matches in one email.</p></div></header>
+      <form id="digest-form" class="panel">
+        <div id="mail-status" class="hint"></div>
+        <label for="email">Email address</label>
+        <input id="email" type="email" autocomplete="email" maxlength="254">
+        <label for="frequency">Frequency</label>
+        <select id="frequency"><option value="off">Off</option><option value="daily">Daily</option><option value="weekly">Weekly</option></select>
+        <div class="inline form-actions"><button class="primary">Save preferences</button><button id="preview" type="button" class="secondary">Preview next digest</button></div>
+      </form>
+      <pre id="digest-preview" class="panel" hidden></pre>
+    </section>
+    <div id="message" role="status" aria-live="polite" hidden></div>
+  </main>
+</div>
+</body>
+</html>
